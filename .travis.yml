@@ -17,7 +17,7 @@ script:
 #deploying the app on Docker & Heroku
 - mvn heroku:deploy
 
-script: ./mvnw clean install
+#script: ./mvnw clean install
 
 root: linux
 
