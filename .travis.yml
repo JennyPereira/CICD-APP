@@ -21,9 +21,6 @@ script: ./mvnw clean install
 
 root: linux
 
-install:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
 jobs:
   include:
     - stage: Test
