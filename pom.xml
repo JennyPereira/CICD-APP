@@ -10,6 +10,7 @@
 	</parent>
 	<groupId>net.codejava</groupId>
 	<artifactId>ProductManager</artifactId>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ProductManager</name>
 	<description>Practica de un microservicio con Spring</description>
