@@ -8,7 +8,7 @@ LABEL maintainer="jennypereira121996@gmail.com"
 VOLUME /tmp
 
 #esto debo borrar si no funciona
-#ADD target/cicd-app-0.0.1-SNAPSHOT.jar app.jar
+ADD target/cicd-app.jar app.jar
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
 
