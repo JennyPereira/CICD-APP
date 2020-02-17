@@ -4,16 +4,15 @@ jdk:
 
 install:
 #  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-   - eval ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V 
 
 script:
-  - mvn deploy
+  - mvn heroku:deploy
 
 before install: 
   - echo "$DOCKER_PASSWORD" | docker login  -u "$DOCKER_USERNAME" --password-stdin
   - docker pull openjdk:8-jdk-alpine
   #deploying the app on Docker & Heroku
-  #- mvn deploy
+  - mvn deploy
   
 root: linux
 
