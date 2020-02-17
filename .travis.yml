@@ -7,7 +7,7 @@ services:
   #Linking Travis CI and Docker
   - docker
 before install: 
- - mvn clean
+  - mvn -q package -Dmaven.test.skip=true
   - echo "$DOCKER_PASSWORD" | docker login  -u "$DOCKER_USERNAME" --password-stdin
   - docker pull openjdk:8-jdk-alpine
 
