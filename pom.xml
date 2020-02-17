@@ -23,6 +23,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			
+			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+			
+			<docker.image.prefix>fanjups</docker.image.prefix>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
