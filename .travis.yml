@@ -13,5 +13,5 @@ before install:
   #deploying the app on Docker & Heroku
   - mvn test
   
-script:
-  - ./mvnw clean install -B  
+#script:
+ # - ./mvnw clean install -B  
