@@ -6,7 +6,7 @@ install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 script:
-  - mvn test
+  - mvn deploy
 
 before install: 
   - echo "$DOCKER_PASSWORD" | docker login  -u "$DOCKER_USERNAME" --password-stdin
@@ -15,11 +15,6 @@ before install:
   #- mvn deploy
   
 root: linux
-
-jobs:
-  include:
-    - stage: Test
-    - script: mvn test
 
 notification:
   email: jennypereira121996@gmail.com
