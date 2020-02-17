@@ -15,10 +15,8 @@ services:
 before install: 
   #- mvn install
   - chmod +x mvnw
-  
-install: 
   - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
+  
 #install: mvn install
 
 cache:
