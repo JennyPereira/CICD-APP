@@ -1,16 +1,1 @@
-language: java
-jdk:
-  - openjdk8
 
-services: 
-  #Linking Travis CI and Docker
-  - docker
-
-before install: 
-  - echo "$DOCKER_PASSWORD" | docker login  -u "$DOCKER_USERNAME" --password-stdin
-  - docker pull openjdk:8-jdk-alpine
-  #deploying the app on Docker & Heroku
-  - mvn test
-  
-#script:
- # - ./mvnw clean install -B  
