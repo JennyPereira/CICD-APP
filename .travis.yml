@@ -8,6 +8,8 @@ services:
 
 before install: 
   - chmod +x mvnw
+  - echo "$DOCKER_PASSWORD" | docker login  -u "$DOCKER_USERNAME" --password-stdin
+  - docker pull openjdk:8-jdk-alpine
 
 install: 
   - mvn -N io.takari:maven:wrapper
