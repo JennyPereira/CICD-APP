@@ -2,21 +2,16 @@ sudo: required
 language: java
 jdk: openjdk8
 
-addons:
-  sonarcloud:
-    organization: "CICD-APP"
-    token:
-      secure: $SONAR_TOKEN # encrypted value of your token
-
 services: 
   #Linking Travis CI and Docker
   - docker
 
 before install: 
-  #- mvn install
+  - mvn clear
   - chmod +x mvnw
   
-script: 
+install: 
+  - mvn -N io.takari:maven:wrapper
   - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
   
 #install: mvn install
