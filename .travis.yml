@@ -6,26 +6,32 @@ services:
   #Linking Travis CI and Docker
   - docker
 
-before install: 
-  - mvn clean
+env:
+  global: 
+  - secure: "encrypted-dockerhub-username"
+  - secure: "encrypted-dockerhub-password"
+  - secure: "encrypted-heroku-api-key"
+  - COMMIT=${TRAVIS_COMMIT::7}
+
+before install:
   - chmod +x mvnw
   
-install: mvn install
-  
-install: 
-  - mvn -N io.takari:maven:wrapper
-  #- ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  
-#install: mvn install
+script: 
+  - ./mvnw clean install -B
 
 cache:
   directories:
-    - '$HOME/.m2/settings.xml'
+    - '$HOME/.m2/repository'
 
 after_success:
-#Generating Site
-- travis_wait mvn site
-- bash <(curl -s https://codecov.io/bash)
-# SonarCloud
-# the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+- export IMAGE_NAME=cicdaplicationtest/cicd-app
+- docker build -t $IMAGE_NAME:$COMMIT .
+- docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
+- docker push $IMAGE_NAME
+
+#deploy:
+#  provider: heroku
+#  api_key: $HEROKU_API_KEY
+#  app: app-usuarios-service
