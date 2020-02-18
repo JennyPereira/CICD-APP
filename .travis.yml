@@ -14,7 +14,7 @@ install: mvn install
   
 install: 
   - mvn -N io.takari:maven:wrapper
-  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  #- ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
   
 #install: mvn install
 
