@@ -1,22 +1,19 @@
-# Start with a base image containing Java runtime
-FROM openjdk:8-jdk-alpine
+FROM fabric8/java-alpine-openjdk8-jre
 
 # Add Maintainer Info
 LABEL maintainer="jennypereira121996@gmail.com"
 
 # Add a volume pointing to /tmp
 VOLUME /tmp
+ADD target/springboot-servicio-usuarios-0.0.1-SNAPSHOT.jar app.jar
+RUN sh -c 'touch /app.jar'
+ENV JAVA_OPTS="-Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8085,suspend=n"
+ENV SPRING_PROFILES_ACTIVE "docker"
 
-#esto debo borrar si no funciona
-#ADD target/cicd-app.jar app.jar
-# Make port 8080 available to the world outside this container
-EXPOSE 8080
-
-# The application's jar file
-ARG JAR_FILE
+EXPOSE 8080 8085
 
 # Add the application's jar to the container
 #ADD ${JAR_FILE} app.jar
 
 # Run the jar file 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=container", "-jar","/app.jar"]
